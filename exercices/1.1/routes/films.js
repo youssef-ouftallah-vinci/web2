@@ -28,7 +28,7 @@ const films = [
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.json(films);
+  return res.json(films);
 });
 
 module.exports = router;
