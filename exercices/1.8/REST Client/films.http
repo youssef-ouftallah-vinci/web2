@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:3000
+
+### Create a film
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "Nemo",
+    "duration": 100,
+    "budget": 94,
+    "link": "https://www.imdb.com/title/tt0266543/"
+}
+
+### Read all films
+GET {{baseUrl}}/films
+
+### Read filtered films
+GET {{baseUrl}}/films?minimum-duration=96
+
+### Read one
+GET {{baseUrl}}/films/2
+
+### Delete film with ID == 4
+DELETE {{baseUrl}}/films/4
+
+### Update film with ID == 5
+PATCH {{baseUrl}}/films/5
+Content-Type: application/json
+
+{
+    "title":"Némo5"
+}
+
+### Update film with ID == 4 or creat it if not ID found
+PUT {{baseUrl}}/films/4
+Content-Type: application/json
+
+{
+    "title": "Nemo",
+    "duration": 101,
+    "budget": 90,
+    "link": "https://www.imdb.com/title/tt0266543/"
+}
