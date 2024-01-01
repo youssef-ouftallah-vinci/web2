@@ -46,4 +46,22 @@ async function deleteOneMovie(id){
 
 }
 
-export { readAllMovies, addOneMovie, deleteOneMovie };
+async function updateOneMovie(id, newFilm){
+    const options = {
+        method: 'PATCH',
+        body: JSON.stringify(newFilm),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const response = await fetch(`/api/films/${id}`, options);
+
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    const updatedFilm = await response.json();
+
+    console.log('Updated film : ', updatedFilm);
+}
+
+export { readAllMovies, addOneMovie, deleteOneMovie, updateOneMovie };
