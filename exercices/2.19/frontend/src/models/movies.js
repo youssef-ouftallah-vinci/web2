@@ -1,5 +1,3 @@
-const movies = [];
-
 const readAllMovies = async () => {
     try{
 
@@ -15,6 +13,22 @@ const readAllMovies = async () => {
     }
 };
 
-const addOneMovie = (movie) => movies.push(movie);
+async function addOneMovie (movie) {
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const response = await fetch('/api/films', options);
+
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    const newFilm = await response.json();
+
+    console.log('New film added : ', newFilm);
+};
 
 export { readAllMovies, addOneMovie };

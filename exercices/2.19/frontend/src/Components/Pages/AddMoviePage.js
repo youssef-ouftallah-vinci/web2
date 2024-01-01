@@ -62,17 +62,17 @@ const AddMoviePage = () => {
   const budget = document.querySelector('#budget');
   const link = document.querySelector('#link');
 
-  myForm.addEventListener('submit', (e) => {
+  myForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const movieToBeCreated = {
       title: title.value,
-      duration: duration.value,
-      budget: budget.value,
+      duration: Number(duration.value),
+      budget: Number(budget.value),
       link: link.value,
     };
 
-    addOneMovie(movieToBeCreated);
+    await addOneMovie(movieToBeCreated);
     Navigate('/movies');
   });
 };
