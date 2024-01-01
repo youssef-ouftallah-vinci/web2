@@ -31,4 +31,19 @@ async function addOneMovie (movie) {
     console.log('New film added : ', newFilm);
 };
 
-export { readAllMovies, addOneMovie };
+async function deleteOneMovie(id){
+    const options = {
+        method: 'DELETE',
+    };
+
+    const response = await fetch(`/api/films/${id}`, options);
+
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    const deletedFilm = await response.json();
+
+    console.log('Deleted film : ', deletedFilm);
+
+}
+
+export { readAllMovies, addOneMovie, deleteOneMovie };

@@ -1,4 +1,4 @@
-import { readAllMovies } from '../../models/movies';
+import { readAllMovies, deleteOneMovie } from '../../models/movies';
 
 const ViewMoviePage = async () => {
   const main = document.querySelector('main');
@@ -11,6 +11,7 @@ const ViewMoviePage = async () => {
   const moviesAsHtmlTable = getHtmlMovieTableAsString(movies);
 
   movieWrapper.innerHTML = moviesAsHtmlTable;
+  deleteMovie();
 };
 
 function getHtmlMovieTableAsString(movies) {
@@ -35,6 +36,7 @@ function getHtmlMovieTableAsString(movies) {
       <td><a href="${element.link}" target="_blank""> ${element.title}</a></td>
       <td>${element.duration}</td>
       <td>${element.budget}</td>
+      <td> <button id="filmDelete" data-value="${element.id}">Delete</button>
     </tr>
     `;
   });
@@ -42,6 +44,18 @@ function getHtmlMovieTableAsString(movies) {
   htmlMovieTable += '</tbody></table>';
 
   return htmlMovieTable;
+}
+
+function deleteMovie(){
+  const buttons = document.querySelectorAll('#filmDelete');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', async (e) => {
+      const {value} = e.target.dataset;
+      await deleteOneMovie(value);
+      ViewMoviePage();
+    })
+  });
 }
 
 export default ViewMoviePage;
